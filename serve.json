@@ -1,0 +1,11 @@
+{
+  "public": ".",
+  "unlisted": [
+    ".DS_Store",
+    ".git",
+    "node_modules",
+    "*.json",
+    "*.md",
+    ".gitignore"
+  ]
+}
