@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo</title>
+</head>
+<body ng-app="app">
+	<div ng-controller="firstCtrl">
+		<input type="text" ng-model='data.name'>
+		<input type="text" ng-model='Data.message'>
+		<p>
+			first-name:{{data.name}}
+		</p>
+		<p>
+			first-message:{{Data.message}}
+		</p>
+	</div>
+	<div ng-controller="secondCtrl">
+		<p>
+			second-name:{{data.name}}
+		</p>
+		<p>
+			second-message:{{Data.message}}
+		</p>
+	</div>
+</body>
+<script src="node_modules/angular/angular.js"></script>
+<script type='text/javascript'>
+	var myApp = angular.module('app',[]);
+	myApp.factory('Data',function(){
+		return {
+			message : 'hello angular'
+		}
+	})
+	myApp.controller('firstCtrl',['$scope','Data',function($scope,Data){
+		$scope.data = {
+			name:'xiao ming'
+		};
+		$scope.Data = Data;
+	}])
+	myApp.controller('secondCtrl', ['$scope','Data', function($scope,Data){
+		console.log($scope)
+		$scope.data = $scope.$$prevSibling.data;
+		$scope.Data = Data;
+	}])
+</script>
+</html>

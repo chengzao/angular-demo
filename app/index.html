@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>电影展示</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/wap.css" />
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <script type="text/javascript" src="js/modernizr.min.js"></script>
+    <script type="text/javascript">
+      var CSSettings = { pluginPath: "module" };
+    </script>
+    <script type="text/javascript" src="js/cute.slider.js"></script>
+    <script type="text/javascript" src="js/cute.transitions.all.js"></script>
+  </head>
+  <body ng-app="moviecat">
+    <div class="top">
+      <div class="header" ng-controller="mainController">
+        <a href="#/home_page"><img src="assets/img/logo.png" alt=""/></a>
+        <div class="search">
+          <form ng-submit="search()">
+            <input
+              ng-model="query"
+              class="my-input"
+              type="text"
+              placeholder="电影搜索"
+            />
+            <button>搜索</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- 导航栏开始 -->
+      <nav class="nav">
+        <ul>
+          <!-- li中添加 active 类样式，显示焦点状态。 -->
+          <li auto-active="active"><a href="#/home_page">首页</a></li>
+          <li auto-active="active"><a href="#/in_theaters">正在热映</a></li>
+          <li auto-active="active"><a href="#/coming_soon">即将上映</a></li>
+          <li auto-active="active"><a href="#/top250">Top250</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="containers ng-cloak"><div ng-view></div></div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/prefixfree.min.js"></script>
+    <script src="module/angular/angular.js"></script>
+    <script src="module/angular-route/angular-route.js"></script>
+    <script src="home_page/module.js"></script>
+    <script src="movie_detail/module.js"></script>
+    <script src="movie_list/module.js"></script>
+    <script src="component/http-server.js"></script>
+    <script src="component/auto-active.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+
+	var obj ={};
+	obj.name = 'xiaoming';
+	function fn(){
+		console.log('aaa');
+	}
+	
+	obj[name] = function(){
+		fn();
+	}
+	var haha = 'xiaowang';
+	window[haha] = function(){
+		fn();
+	} 
+
+	console.log(obj.name);
+	console.log(obj[name]);
+	console.log(haha);
+	console.log(window.haha);
+</script>
+</html>

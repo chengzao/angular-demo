@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Dependency Injection</title>
+</head>
+<body>
+  <h1>依赖注入di</h1>
+  <!-- 
+    service:对外开放的服务
+    value:Value 是一个简单的 javascript 对象，用于向控制器传递值（配置阶段）。
+    factory:是一个函数,用于向service提供计算或返回值。
+    provider:功能与factory相似，定义一个factory函数,用于向service提供计算或返回值。。
+    constant:constant(常量)用来在配置阶段传递数值，注意这个常量在配置阶段是不可用的。
+   -->
+
+  <div ng-app="mainApp" ng-controller="CalcController">
+    <p>输入一个数字: <input type="number" ng-model="number" /></p>
+    <button ng-click="square()">X<sup>2</sup></button>
+    <p>结果: {{result}}</p>
+  </div>
+  
+  <!-- 依赖注入写法1 -->
+  <script src="../node_modules/angular/angular.js"></script>
+  <script>
+    // https://blog.csdn.net/zeping891103/article/details/77446544?locationNum=9&fps=1
+
+    // var mainApp = angular.module("mainApp", []);
+    // mainApp.value("defaultInput", 5);
+    // mainApp.constant("configParam", "constant value");
+    // mainApp.factory('MathService', function () {
+    //   var factory = {};
+    //   factory.multiply = function (a, b) {
+    //     return a * b;
+    //   }
+    //   return factory;
+    // });
+    // mainApp.service('CalcService', function (MathService) {
+    //   //或者返回一个对象
+    //   this.square = function (a) {
+    //     return MathService.multiply(a, a);
+    //   }
+    // });
+    // mainApp.controller('CalcController', function ($scope, CalcService, defaultInput, configParam) {
+    //   $scope.number = defaultInput;
+    //   $scope.result = CalcService.square($scope.number);
+    //   $scope.square = function () {
+    //     $scope.result = CalcService.square($scope.number);
+    //   }
+    //   console.log(defaultInput);
+    //   console.log(configParam);
+    // });
+  
+    // 依赖注入写法2
+  	var mainApp = angular.module("mainApp", []);
+  	mainApp.config(function($provide) {
+  		$provide.provider('MathService', function() {
+  			this.$get = function() {
+  				var factory = {};
+  				factory.multiply = function(a, b) {
+  					return a * b;
+  				}
+  				return factory;
+  			};
+  		});
+  	});
+  	mainApp.value("defaultInput", 5);
+  	mainApp.constant("configParam", "constant value");
+  	mainApp.service('CalcService', function(MathService) {
+  		this.square = function(a) {
+  			return MathService.multiply(a, a);
+  		}
+  	});
+  	mainApp.controller('CalcController', function($scope, CalcService, defaultInput, configParam) {
+  		$scope.number = defaultInput;
+  		$scope.result = CalcService.square($scope.number);
+  		$scope.square = function() {
+  			$scope.result = CalcService.square($scope.number);
+  		}
+  		console.log(defaultInput);
+  		console.log(configParam);
+    });
+
+  </script>
+
+</body>
+</html>

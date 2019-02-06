@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>filter</title>
+</head>
+<body ng-app="myApp" ng-controller="demoController">
+
+	<h3>money</h3>
+	<p>{{money | currency}}</p>
+	<p>{{money | currency : '￥'}}</p>
+	<p>{{money | currency : '人民币:'}}</p>
+
+	<h3>date</h3>
+	<p>{{data | date}}</p>
+	<p>{{data | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+
+	<h3>json</h3>
+	<p>{{jsonData}}</p>
+	<pre>{{jsonData | json:5}}</pre>
+
+	<h3>limitTo</h3>
+	<p>{{title | limitTo :12}}...</p>
+	<p>{{title | limitTo :7:5}}...</p>
+
+	<h3>orderBy</h3>
+	<ul>
+		<li ng-repeat="item in obj | orderBy : '+id'">
+			{{item.id}}:{{item.name}}
+		</li>
+	</ul>
+	<ul>
+		<li ng-repeat="item in obj | orderBy : '-id'">
+			{{item.id}}:{{item.name}}
+		</li>
+	</ul>
+
+	<h3>filter</h3>
+
+    <ul>
+        <li ng-repeat="item in obj2 |filter :false">
+            {{item.id}},{{item.name}},{{item.completed}}
+        </li>
+    </ul>	
+
+    <ul>
+        <li ng-repeat="item in obj3 |filter : isCompleted">
+            {{item.id}},{{item.name}},{{item.completed}}
+        </li>
+    </ul>
+
+
+</body>
+<script src='../node_modules/angular/angular.js'></script>
+<script>
+	var app = angular.module('myApp', []);
+
+	app.controller('demoController', ['$scope','$filter', function($scope,$filter){
+		$scope.money = 78936676;
+		
+		$scope.data = +new Date();
+
+		$scope.jsonData={name:'小明',age:12,parents:[{name:'小明爸',age:36},{name:'小明妈',age:34}]};
+
+        $scope.title="hello我爱自己的祖国, 因为我是中国人";
+
+		var obj=[
+            {id:2,name:'学习'},
+            {id:1,name:'吃饭'},
+            {id:3,name:'敲代码'},
+            {id:4,name:'睡觉'},
+            {id:0,name:'起床'},
+            ];
+
+        $scope.obj = obj;
+
+        var obj2=[
+            {id:1,name:'学习',completed:true},
+            {id:2,name:'吃饭',completed:false},
+            {id:3,name:'敲代码',completed:true},
+            {id:4,name:'睡觉',completed:false},
+            {id:5,name:'起床,我是false',completed:true},
+            ]
+        $scope.obj2=obj2;
+
+
+        var obj3=[
+            {id:1,name:'学习',completed:true},
+            {id:2,name:'吃饭',completed:false},
+            {id:3,name:'敲代码',completed:true},
+            {id:4,name:'睡觉',completed:false},
+            {id:5,name:'起床,我是false',completed:true},
+            ]
+        $scope.obj3=obj3;
+        $scope.isCompleted={completed:true};
+
+        //
+        var number = $filter('number')(9000123)
+        console.log(number);
+        
+	}])
+</script>
+</html>

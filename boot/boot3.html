@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="box" ng-app="app">
+      <div ng-controller="myCtrl">
+        <label for="">{{name1}}</label>
+        <input ng-model="name" type="text" placeholder="请输入姓名" />
+        <p>我的姓名： {{name}}</p>
+      </div>
+    </div>
+
+    <div id="box2" ng-app="app2">
+      <div ng-controller="myCtrl">
+        <label for="">{{name2}}</label>
+        <input ng-model="age" type="number" placeholder="请输入年龄" />
+        <p>我的年龄: {{age}}</p>
+      </div>
+    </div>
+  </body>
+  <script src="../node_modules/angular/angular.js"></script>
+  <script>
+    // 自动加载
+    var myApp = angular.module("app", []);
+    myApp.controller("myCtrl", [
+      "$scope",
+      function($scope) {
+        $scope.name1 = "输入姓名";
+      }
+    ]);
+
+    // 手动加载
+    var box2 = document.getElementById("box2");
+    var myApp2 = angular.module("app2", []);
+    myApp2.controller("myCtrl", [
+      "$scope",
+      function($scope) {
+        $scope.name2 = "输入年龄";
+      }
+    ]);
+
+    angular.element(document).ready(function() {
+      angular.bootstrap(document, ["app2"]);
+    });
+  </script>
+</html>

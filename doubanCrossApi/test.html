@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>crossDomain</title>
+</head>
+<body>
+    <script>
+        //var obj={}
+        // 自己封装jsonP
+        function crossDomain(url,arg,fn){
+            // 1.拼接地址
+            //?start=0&count=3
+            var queryString='';
+            for(var key in arg){
+                queryString += key+'='+arg[key]+'&'
+            }
+            url +='?'+queryString;
+            // 加上callback 0.1212121
+            var callbackName="jsonp_"+Math.random().toString().substr(2);
+
+            /// obj={name:"aa"}
+            /// obj.name; obj["name"
+            window[callbackName]=function(){
+                fn();
+           
+                document.body.removeChild(scriptElement);
+            };
+
+            //window.jsonp_xxx=fn;
+            url+="callback="+callbackName;
+   
+            console.log(url);
+            // 2.创建script标签，并且把拼接后的url放到script标签的src上。
+            var scriptElement=document.createElement('script');
+            scriptElement.src=url;
+            document.body.appendChild(scriptElement);
+        }
+    </script>
+
+    <script>
+        crossDomain('http://api.douban.com/v2/movie/in_theaters',{start:0,count:3}
+            ,function(data){
+                console.log(111);
+            });
+
+        // crossDomain('http://api.douban.com/v2/movie/in_theaters',{start:0,count:3}
+        //     ,function(data){
+        //         console.log(222);
+        //     });
+        // for(var i=0;i<10;i++){
+        //     crossDomain('http://api.douban.com/v2/movie/in_theaters',{start:0,count:3}
+        //             ,function(data){
+        //                 console.log(222);
+        //             });
+        // }
+    </script>
+</body>
+</html>

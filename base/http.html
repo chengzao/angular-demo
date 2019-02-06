@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>demo-ng-http</title>
+  <script type="text/javascript" src="../js/libs/angular/angular.js"></script>
+  <script type="text/javascript" src="../js/libs/transformCode.js"></script>
+</head>
+
+<body>
+  <div ng-app="myApp" ng-controller="myCtrl">
+    <button ng-click="requesthttp();">跨域请求语音服务</button>
+    <p>请求结果：</p>
+    <p ng-model="result">{{result}}</p>
+    <audio ng-src="{{audioURL}}" controls="controls"></audio>
+  </div>
+
+  <script>
+
+    // https://blog.csdn.net/zeping891103/article/details/77446544?locationNum=9&fps=1
+
+
+    var app = angular.module("myApp", [], function ($httpProvider) {
+      $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+    });
+
+    //http请求拦截，支持拦截post、get、jsonp
+    app.config(function ($httpProvider) {
+      $httpProvider.interceptors.push(function ( /**此处可加service*/) {
+        return {
+          'request': function (config) {
+            console.log(config);
+            return config;
+          },
+          'response': function (response) {
+            console.log(response);
+            return response;
+          },
+          'responseError': function (Error) {
+            console.log(Error);
+          }
+        }
+      });
+    });
+
+    //配置http访问的白名单，使用jsonp时用到
+    app.config(function ($sceDelegateProvider) {
+      $sceDelegateProvider.resourceUrlWhitelist([
+        'self', //本域
+        'http://voice.yoya.com/**' //跨域
+      ]);
+    });
+
+    //post、get、jsonp请求
+    app.controller("myCtrl", function ($scope, $http, $timeout) {
+      $scope.requesthttp = function () {
+        //jsonp
+        var beanObject = new Object();
+        beanObject.roleid = "701";
+        beanObject.nsspermissions = "public";
+        beanObject.volumn = "50";
+        beanObject.speed = "50";
+        beanObject.ttstxet = encodeURI("123");
+        //验证object转为json
+        var jsonData = JSON.stringify(beanObject);
+        $http.jsonp('http://localhost:80/ninVoiceService_V2/NewTTSJP?base64Data=' + jsonData, {
+          jsonpCallbackParam: 'jsonpcallback'
+        }).then(function (response) {
+          console.log("success:", response);
+        }, function (response) {
+          console.log("error:", response);
+        });
+        //					return;
+
+        // get 请求一个json文件
+        //					$http.get("http://nss-public.yoya.com/netinnet-movie-pro/data/release_movie/201612/57832e74e4b005e960aec8ad00000000/20161223111741/58212c7ae4b0d8e28b0684d300000000/play.json")
+        //						.then(function(response) {
+        //							console.log("success:", response);
+        //						}, function(response) {
+        //							console.log("error:", response);
+        //						});
+        //
+        //					return;
+
+        // post 请求一段TTS音频
+        //					var msg = "大家好，欢迎来到优芽";
+        //					var beanObject = new Object();
+        //					beanObject.roleid = "701";
+        //					beanObject.nsspermissions = "public";
+        //					beanObject.volumn = "50";
+        //					beanObject.speed = "50";
+        //					beanObject.ttstxet = encodeURI(msg);
+        //					var jsonData = JSON.stringify(beanObject);
+        //					var param_Base64 = encode64(jsonData); //transformCode.js参数加密
+        //					$http({
+        //						method: 'post',
+        //						url: 'http://localhost:80/ninVoiceService_V2/NewTTS',
+        //						params: {
+        //							'name': 'lisa' //值对格式参数
+        //						},
+        //						data: param_Base64 //文本流格式参数，若没有则可移除
+        //					}).then(function(response) {
+        //						console.log("success:", response);
+        //						$timeout(function() {
+        //							var url = response.data.url;
+        //							$scope.audioURL = url.toString(); 
+        //						}, 5000);
+        //					}, function(response) {
+        //						console.log("error:", response);
+        //					});
+      }
+    });
+  </script>
+</body>
+
+</html>

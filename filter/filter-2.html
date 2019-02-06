@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>filter</title>
+</head>
+<body ng-app="app">
+	<div ng-controller="ctrl">
+		<ul>
+			<li ng-repeat="user in data | filterAge">
+				{{user.name}}
+				{{user.age}}
+				{{user.city}}
+			</li>
+		</ul>
+	</div>
+</body>
+<script src="../node_modules/angular/angular.js"></script>
+<script src="filter-2.js"></script>
+</html>

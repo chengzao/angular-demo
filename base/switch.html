@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>switch</title>
+</head>
+
+<body>
+  <div ng-app="myApp" ng-controller="myCtrl">
+    <form>
+      选择一个选项:
+      <input type="radio" ng-model="myVar" value="dogs">Dogs
+      <input type="radio" ng-model="myVar" value="tuts">Tutorials
+      <input type="radio" ng-model="myVar" value="cars">Cars
+    </form>
+
+    <div ng-switch="myVar">
+      <div ng-switch-when="dogs">
+        <h1>Dogs</h1>
+        <p>Welcome to a world of dogs.</p>
+      </div>
+      <div ng-switch-when="tuts">
+        <h1>Tutorials</h1>
+        <p>Learn from examples.</p>
+      </div>
+      <div ng-switch-when="cars">
+        <h1>Cars</h1>
+        <p>Read about cars.</p>
+      </div>
+    </div>
+  </div>
+  <script src="../node_modules/angular/angular.js"></script>
+  <script>
+    var app = angular.module("myApp", []);
+    app.controller("myCtrl", function ($scope) { });
+  </script>
+</body>
+
+</html>

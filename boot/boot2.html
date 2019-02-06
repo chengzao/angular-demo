@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div ng-controller="myCtrl">
+		<span>{{name}}</span>
+	 </div>
+</body>
+<script src="../node_modules/angular/angular.js"></script>
+<script>
+	var myApp = angular.module('app', []);
+	myApp.controller('myCtrl', ['$scope', function ($scope) {
+		$scope.name = 'xiaomig';
+	}])
+
+	// 手动启动
+	angular.element(document).ready(function () {
+		angular.bootstrap(document, ['app']);
+	})
+</script>
+</html>

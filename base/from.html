@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>form表单标准</title>
+  <style>
+    input.ng-invalid {
+				background-color: lightblue;
+			}
+		</style>
+</head>
+<body>
+  <h1>angular form表单标准</h1>
+  <!--
+  	描述：基本表单元素及表单验证 
+  	ng-options：下拉列选择框 ，如
+  		<select ng-init="selectedName = names[0]" ng-model="selectedName" ng-options="x for x in names"></select>
+  		数据格式为字符串数组["",""] 使用x for x in names
+  		数据格式为单独的对象{x:y} 使用x for (x,y) in names
+  		数据格式为对象数组[{},{}] 使用x.attr for x in names	
+  	ng-repeat：重复元素，如
+      <option ng-repeat="x in address">{{x}}</option>
+    
+    form表单的系统检验指令
+      $error.required 唯一值验证
+      $error.email 文本输入内置电子邮件验证。
+      $error.number 带有数量验证的文本输入。也可以有最小和最大值的附加属性。
+      $error.date 带有输入日期文本输入。
+      $error.url 带有输入验证的URL文本输入。
+      $error.minlength,参数范围需从input中ng-minlength设置
+      $error.maxlength，参数范围需从input中ng-maxlength设置
+      $error.pattern,正则表达式需从input中ng-pattern设置
+      $dirty 表单有填写记录
+      $pristine 表单没有填写记录
+      $valid 字段内容合法的,如formname.$valid
+      $invalid 字段内容是非法的
+  -->
+  <div ng-app="myApp" ng-controller="myCtrl">
+    <form name="myForm">
+      <label for="in_text">姓名:</label>
+      <input id="in_text" type="text" ng-model="in_text" name="myName" required />
+      <span ng-show="myForm.myName.$error.required">(姓名为必填项)</span>
+      <br />
+      <label>性别:</label>
+      <input type="radio" name="mySex" ng-model="in_Sex" value="男" ng-checked="true" />男
+      <input type="radio" name="mySex" ng-model="in_Sex" value="女" />女<br />
+      <label>课程:</label>
+      <input type="checkbox" ng-model="in_checkbox1" />课程1
+      <input type="checkbox" ng-model="in_checkbox2" />课程2<br />
+      <label>邮箱:</label>
+      <input type="email" ng-model="in_email" name="myEmail" />
+      <span ng-show="myForm.myEmail.$error.email">(邮箱格式不正确)</span>
+      <br />
+      <label>电话:</label>
+      <input type="tel" ng-model="in_tel" /><br />
+      <label>居住:</label>
+      <!--<select ng-model="in_select" ng-init="in_select = address[0]" ng-options="x for x in address"></select>-->
+      <select ng-model="in_select" ng-init="in_select = address[0]">
+        <option ng-repeat="x in address">{{x}}</option>
+      </select><br />
+      <label>评价:</label>
+      <textarea ng-model="in_textarea" cols="10" rows="10"></textarea><br />
+      <button ng-click="ok()">提交</button>
+    </form>
+  </div>
+  <script src="../node_modules/angular/angular.js"></script>
+  <script>
+    var app = angular.module("myApp", []);
+    app.controller("myCtrl", function ($scope) {
+      $scope.in_text = "";
+      $scope.in_Sex = "男";
+      $scope.in_checkbox1 = $scope.in_checkbox2 = false;
+      $scope.in_email = "";
+      $scope.in_tel = "";
+      $scope.address = ["厦门", "泉州", "福州"];
+      $scope.ok = function () {
+        console.log("姓名：", $scope.in_text);
+        console.log("性别：", $scope.in_Sex);
+        console.log("课程1：", $scope.in_checkbox1);
+        console.log("课程2：", $scope.in_checkbox2);
+        console.log("邮箱：", $scope.in_email);
+        console.log("电话：", $scope.in_tel);
+        console.log("居住：", $scope.in_select);
+        console.log("评价：", $scope.in_textarea);
+        console.log("-----------------分割线--------------------");
+      }
+    });
+  </script>
+</body>
+
+</html>

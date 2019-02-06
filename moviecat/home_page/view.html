@@ -1,0 +1,33 @@
+<div class="list" ng-controller="home_pageController">
+
+    <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+      <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+         <a href="{{slide.url}}"><img ng-src="{{slide.image}}" style="margin:auto;width:auto;height:300px"></a>
+        <div class="carousel-caption">
+          <!-- <h4>Slide {{slide.id}}</h4> -->
+          <!-- <p>{{slide.text}}</p> -->
+        </div>
+      </div>
+    </div>
+
+    <ul>
+        <li ng-repeat="item in imgs">
+            <a href="#/details/{{item.id}}">
+                <img ng-src="{{item.images.large}}"  alt="">
+            </a>
+            <div class="meta">
+                <h4><span>{{item.title}}</span> <em>{{item.rating.average}}分</em></h4>
+                <div class="otherinfo">类型:<span ng-repeat="a in item.genres">{{a}}</span></div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="loading-box" ng-show="loading">
+    <div class="sk-folding-cube">
+      <div class="sk-cube1 sk-cube"></div>
+      <div class="sk-cube2 sk-cube"></div>
+      <div class="sk-cube4 sk-cube"></div>
+      <div class="sk-cube3 sk-cube"></div>
+    </div>
+</div>

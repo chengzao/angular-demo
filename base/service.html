@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div ng-app="myApp" ng-controller="myCtrl">
+    <input type="number" ng-model="num1" />
+    <input type="number" ng-model="num2" />
+    <button ng-click="countFun();">计算</button>
+    <br />
+    <p ng-model="jia">相加:{{jia}}</p>
+    <p ng-model="jian">相减:{{jian}}</p>
+  </div>
+  <script src="../node_modules/angular/angular.js"></script>
+  <script>
+    var app = angular.module("myApp", []);
+    app.service("countNum", function () {
+      this.jia = function (a, b) {
+        return parseInt(a) + parseInt(b);
+      }
+      this.jian = function (a, b) {
+        return parseInt(a) - parseInt(b);
+      }
+    });
+    app.controller("myCtrl", function ($scope, countNum) {
+      $scope.num1 = 0;
+      $scope.num2 = 0;
+      $scope.jia = 0;
+      $scope.jian = 0;
+      $scope.countFun = function () {
+        $scope.jia = countNum.jia($scope.num1, $scope.num2);
+        $scope.jian = countNum.jian($scope.num1, $scope.num2);
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>a movie cat</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/wap.css" />
+  </head>
+  <body ng-app="moviecat">
+    <!-- header -->
+    <div class="top">
+      <div class="header" ng-controller="mainController">
+        <a href="#/home_page"><img src="assets/img/logo.png" alt=""/></a>
+        <div class="search">
+          <form ng-submit="search()">
+            <input
+              ng-model="query"
+              class="my-input"
+              type="text"
+              placeholder="电影搜索"
+            />
+          </form>
+          <button ng-click="search()">搜索</button>
+        </div>
+      </div>
+      <nav class="nav">
+        <ul>
+          <!-- li中添加 active 类样式，显示焦点状态。 -->
+          <li auto-active class="active"><a href="#/home_page">首页</a></li>
+          <li auto-active><a href="#/in_theaters">正在热映</a></li>
+          <li auto-active><a href="#/coming_soon">即将上映</a></li>
+          <li auto-active><a href="#/top250">Top250</a></li>
+        </ul>
+      </nav>
+    </div>
+    <!-- main -->
+    <div class="container"><div ng-view></div></div>
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>版权所有&copy;<a href="https://github.com/chengzao">chengzao</a></p>
+      </div>
+    </footer>
+  </body>
+  <!-- js -->
+  <script src="assets/js/prefixfree.min.js"></script>
+  <script src="libs/angular/angular.js"></script>
+  <script src="libs/angular-route/angular-route.js"></script>
+  <script src="assets/js/angular-animate.js"></script>
+  <script src="assets/js/angular-sanitize.js"></script>
+  <script src="assets/js/ui-bootstrap-tpls-2.4.0.js"></script>
+  <script src="app.js"></script>
+  <script src="home_page/home_page.js"></script>
+  <script src="movie_list/movie_list.js"></script>
+  <script src="services/http_jsonp.js"></script>
+  <script src="directives/auto_active.js"></script>
+  <script src="movie_detail/movie_detail.js"></script>
+</html>

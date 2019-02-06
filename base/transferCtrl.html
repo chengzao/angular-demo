@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>demo-ng-directive</title>
+  <style>
+    html,body{
+      height: 100%;
+      width: 100%;
+      background-color: antiquewhite;
+    }
+
+    #box{
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body ng-app="myApp">
+
+
+
+
+  <div ng-controller="ParentCtrl">
+    <!--父级-->
+    <div ng-controller="SelfCtrl">
+      <!--自己-->
+      <a ng-click="click()">click me</a>
+      <div ng-controller="ChildCtrl"></div>
+      <!--子级-->
+    </div>
+    <div ng-controller="BroCtrl"></div>
+    <!--平级-->
+  </div>
+
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+  <script src="../node_modules/angular/angular.js"></script>
+
+  <script>
+    var app = angular.module("myApp", []);
+
+    app.controller('SelfCtrl', function ($scope) {
+        $scope.click = function () {
+          // 事件触发$broadcast
+          $scope.$broadcast('to-child', 'child');
+          $scope.$emit('to-parent', 'parent');
+        }
+      });
+
+    app.controller('ParentCtrl', function ($scope) {
+      $scope.$on('to-parent', function (event, data) {
+        console.log('ParentCtrl', data);       //父级能得到值
+      });
+      $scope.$on('to-child', function (event, data) {
+        console.log('ParentCtrl', data);       //子级得不到值
+      });
+    });
+
+    app.controller('ChildCtrl', function ($scope) {
+      $scope.$on('to-child', function (event, data) {
+        console.log('ChildCtrl', data);      //子级能得到值
+      });
+      $scope.$on('to-parent', function (event, data) {
+        console.log('ChildCtrl', data);      //父级得不到值
+      });
+    });
+
+    app.controller('BroCtrl', function ($scope) {
+      $scope.$on('to-parent', function (event, data) {
+        console.log('BroCtrl', data);         //平级得不到值
+      });
+      $scope.$on('to-child', function (event, data) {
+        console.log('BroCtrl', data);         //平级得不到值
+      });
+    });
+
+  </script>
+</body>
+
+</html>

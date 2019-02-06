@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>angular filters</title>
+  <script type="text/javascript" src="../js/libs/angular/angular.js"></script>
+</head>
+
+<body>
+  <h1>angular 过滤器的应用</h1>
+  <!--
+  	描述：过滤器
+  	uppercase:格式化字符串为大写
+  	lowercase:格式化字符串为小写
+  	currency:格式化为货币符号
+  	limitTo　: 正数，表示从头开始截取；负数表示从尾巴开始截取
+  	number : 格式化为保留小数点
+  	date : 格式化为时间
+  	orderBy:"?":某属性按从小到大排序 ( orderBy:'-id' , id 降序排列   )  ( orderBy:'id',  id 升序排列   )
+  	filter:"?":按条件过滤，如filter:{'name':'iphone'}为查找属性name值为iphone的对象
+  -->
+  <div ng-app="myApp" ng-controller="myCtrl">
+    <input type="text" ng-model="name" />
+    <span>大写：{{name | uppercase}}</span>
+    <span>小写：{{name | lowercase}}</span>
+    <br />
+    <p>货币符号：{{ 250 | currency:"RMB" }}</p>
+    <p>正数截取4位：{{"1234567890" | limitTo :4}} </p>
+    <p>负数截取4位：{{"1234567890" | limitTo:-4}} </p>
+    <p>保留2位小数点：{{149016.1945000 | number:2}}</p>
+    <p>time转化为时间：{{1490161945000 | date:"yyyy-MM-dd HH:mm:ss"}}</p>
+    <p>排序及按条件筛选：</p>
+    <input type="text" ng-model="inData" />
+    <ul>
+      <li ng-repeat="x in names | orderBy:'-country' | filter : inData">
+        {{ x.name + ', ' + x.country }}
+      </li>
+    </ul>
+    <p>自定义过滤器，输入一个数值，得到该值+1结果：</p>
+    <input type="text" ng-model="inDIY" />
+    <p>{{inDIY|addOne}}</p>
+    <p>{{inDIY|addOneFilter}}</p>
+  </div>
+  <script src="../node_modules/angular/angular.js"></script>
+  <script>
+    var app = angular.module("myApp", []);
+    app.controller("myCtrl", function ($scope) {
+      $scope.names = [{
+        name: 'Jani',
+        country: 'Norway'
+      },
+      {
+        name: 'Hege',
+        country: 'Sweden'
+      },
+      {
+        name: 'Kai',
+        country: 'Denmark'
+      }
+      ];
+    });
+    //自定义过滤器
+    app.filter('addOne', function () {
+      return function (i) {
+        var result = 0;
+        if (!isNaN(i)) {
+          result = 1 + parseInt(i);
+        }
+        return result;
+      }
+    });
+    //自定义过滤器带参数
+    app.service('addOneService', function () {
+      this.add = function (i) {
+        var result = 0;
+        if (!isNaN(i)) {
+          result = 1 + parseInt(i);
+        }
+        return result;
+      }
+    });
+    app.filter('addOneFilter', ['addOneService', function (addOneService) {
+      return function (i) {
+        return addOneService.add(i);
+      };
+    }]);
+  </script>
+</body>
+
+</html>

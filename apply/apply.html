@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>$apply</title>
+</head>
+<body ng-app="app">
+	<h1 ng-controller="ctrl">
+		{{date}}
+	</h1>
+</body>
+<script src='../node_modules/angular/angular.js'></script>
+<script type="text/javascript">
+	var myApp = angular.module('app',[]);
+	myApp.controller('ctrl', ['$scope', function($scope){
+		$scope.date = new Date();
+		setInterval(function(){
+
+			// $apply --> $eval --> $digest
+			
+			$scope.$apply(function(){
+				$scope.date = new Date();
+			})
+		}, 1000);
+	}])
+</script>
+</html>

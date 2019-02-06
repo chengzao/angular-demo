@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>创建编译元素</h1>
+  <div ng-app="myApp" ng-controller="myCtrl as ctrl">
+    <div id="addEle"></div>
+  </div>
+  <script src="../node_modules/angular/angular.js" charset="utf-8"></script>
+  <script>
+    var app = angular.module("myApp", []);
+    app.controller("myCtrl", function ($scope, $compile) {
+      var vm = this;
+      vm.msg = 'hello compile';
+      // 创建编译函数
+      var compileFn = $compile('<div>{{ ctrl.msg }}</div>');
+      // 传入scope，得到编译好的dom对象(已封装为jqlite对象)
+      // 也可以用$scope.$new()创建继承的作用域
+      var $dom = compileFn($scope);
+      //返回的$dom是一个jQLite(jQuery的子集)对象
+      console.log($dom);
+      // 添加到文档中
+      var jqLite = angular.element(document.getElementById("addEle"));
+      jqLite.append($dom);
+      //$dom.remove(); //移除语句
+    });
+
+  </script>
+</body>
+</html>

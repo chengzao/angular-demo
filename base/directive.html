@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>demo-ng-directive</title>
+</head>
+
+<body ng-app="myApp">
+  <input type="text" ng-model="inData" ng-init="inData=0" />
+  <mydirective></mydirective>
+  <div mydirective></div>
+  <div class="mydirective"></div>
+  <!-- directive: mydirective -->
+
+  <!-- 渲染完成事件触发 -->
+  <div ng-controller="ctrl">
+    <span on-ot-finish-render-filters>aaaa</span>
+  </div>
+
+  <!-- 重定义元素系统事件 -->
+  <input type="file" id="upload" custom-on-change="uploadFile"> 
+
+  <script src="../node_modules/angular/angular.js"></script>
+  <script>
+    // 设置项：
+    //   restrict: E: 标签使用
+    //   restrict: A: 属性使用
+    //   restrict: C: 类名使用
+    //   restrict: M, 需同步设replace: true: 注释使用
+
+    var app = angular.module("myApp", []);
+    app.directive("mydirective", function () {
+      return {
+        restrict: "EACM",
+        replace: true,
+        template: "<p>helloWorld</p>",
+        link: function (scope, element, attrs) { }
+      };
+    });
+
+
+    app.controller('ctrl', ['$scope', function($scope){
+      $scope.$on('ot_ngRepeatFinished', function (ngRepeatFinishedEvent) { });
+    }])  
+    
+    app.directive('onOtFinishRenderFilters', function ($timeout) {
+      return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+          $timeout(function () {
+            scope.$emit('ot_ngRepeatFinished');
+          });
+        }
+      };
+    });
+
+  app.directive('customOnChange', function () {
+    return {
+      restrict: 'A',
+      link: function (scope, element, attr) {
+        var onChangeHandler = scope.$eval(attr.customOnChange);
+        element.bind('change', onChangeHandler);
+      }
+    };
+  });
+  </script>
+</body>
+
+</html>

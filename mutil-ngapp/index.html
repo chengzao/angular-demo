@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>angualr 1.x 在一个页面里创建多个ng-app</h1>
+    <div id="A1" ng-app="app1">
+      <input ng-model="name" type="text" placeholder="请输入姓名" />
+      <p>我的姓名： {{name}}</p>
+    </div>
+
+    <div id="A2" ng-app="app2">
+      <input ng-model="age" type="number" placeholder="请输入年龄" />
+      <p>我的年龄: {{age}}</p>
+    </div>
+    <script src="../node_modules/angular/angular.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var app1 = angular.module("app1", []); //自动加载
+      var app2 = angular.module("app2", []); //手动加载
+      angular.bootstrap(document.getElementById("A2"), ["app2"]); // 手动加载2
+    </script>
+  </body>
+</html>

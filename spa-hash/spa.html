@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>spa</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0
+		}
+		.box{
+			height: 100px;
+			background: pink;
+			line-height: 100px;
+			width: 300px;
+			margin-top: 40px
+		}
+		ul{
+			list-style: none;
+			height: 40px;
+		}
+		li{
+			height: 40px;
+			margin-left: 10px;
+			float: left;
+			line-height: 40px;
+		}
+	</style>
+</head>
+<body>
+    <ul>
+        <li><a href="#find">发现音乐 </a></li>
+        <li><a href="#mine">我的</a></li>
+        <li><a href="#friend">朋友圈</a></li>
+    </ul>
+	<div class="box"></div>
+</body>
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	window.addEventListener('hashchange',function () {
+		var hash = location.hash;
+		var box = document.getElementsByClassName('box')[0];
+
+		switch(hash){
+			case '#find':
+				$.get('find.json',function(data){
+					box.innerHTML=data.type; 
+				},'json');
+			break;
+			case '#mine':
+				$.get('mine.json',function(data){
+					box.innerHTML = data.type;
+				},'json');	
+			break;
+			case '#friend':
+				$.get('friend.json',function(data){
+					box.innerHTML = data.type;
+				},'json');	
+			break;	
+		}
+	})
+</script>
+</html>

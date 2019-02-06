@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义指令</title>
+  <style>
+   *{margin: 0;padding: 0}
+    ul{list-style: none}
+  </style>
+</head>
+<body ng-app="myApp">
+<div my-li></div>
+<div class="my-li"></div>
+<!-- directive: my-zhiling -->
+<div></div>
+<div></div>
+<div></div>
+<div></div>  
+<my-li term="test" grade="demo" ></my-li>
+<script id="tmpl" type="text/ng-template">
+<!-- 利用了浏览器只会解析 type属性为"text/javascript"的script标签的特性 -->
+<!-- <h1 ng-transclude></h1> -->
+<h1>{{dijiqi}}</h1>
+<h1>{{term}}</h1>
+<h1>{{nianji}}</h1>
+<h1>{{grade}}</h1>
+<ul><li>ddd</li></ul>
+</script>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+//  创建模型
+var app = angular.module('myApp',[]);
+
+//  创建字定义指令：
+// 也有两个参数:第一个参数是自定义指令的名字
+// 自定义指令名要求：驼峰命名法
+app.directive('myZhiling',[function(){
+    var obj={
+        restrict:'EMCA',// E:element,C:class,M:Comment,A:Atribute
+        //template:'<div>我是小明</div>',
+        // templateUrl:'./veiw.html',
+        templateUrl:'tmpl',//不要加#号
+        //replace:true,
+        transclude:true,
+        scope:{  //就是可以用来获取自定义指令所在标签的属性值。
+            aaa:'@myclass',//这种方式就可以通过aaa拿到自定义指令所在标签的属性值
+            myclass:'@'// 上面的简写方式:
+        },
+        link:function(scope,element,attributes){
+            //scope参数与controller里的$scope功能类似只不过
+            //这里的scope初始化的属性值只能够在我们的模板中使用,不能够在模板之外的地方使用。
+            scope.name="小明";
+            
+            //element,angular.element
+            console.dir(element);
+            element.on('click',function(){
+                // 在这里可以进行一些dom操作
+            });
+            console.log(attributes);
+        }
+    };
+    return obj;
+}]);
+</script>
+</body>
+</html>

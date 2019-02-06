@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div ng-app="myApp" ng-init="names=['Jani','Hege','Kai']">
+      <input ng-model="name" type="text" placeholder="请输入姓名" />
+      <p>我的姓名： {{name}}</p>
+
+      <p ng-repeat="i in names">{{i}}</p>
+
+      <ul ng-controller="ctrl">
+        <li ng-repeat="item in records" ng-if="item.children.length">
+          <p>{{item.Name}}</p>
+          <ul>
+            <li ng-repeat="val in item.children">{{val}}</li>
+          </ul>
+        </li>
+
+        <select ng-model="myOption" ng-options="value.id as value.label group by value.group for value in myOptions">
+          <option value="">-- 请选择 --</option>
+        </select>
+      </ul>
+
+      <form class="uk-form" ng-controller="TestCtrl">
+        <select ng-model="sex">
+          <option value="m" ng-selected="sex=='m'">Male</option>
+          <option value="f" ng-selected="sex=='f'">Fmale</option>
+        </select>
+      
+        <p>Selected City Code: {{ city.code }}</p>
+        <select ng-model="city" ng-options="city.name for city in cities"></select>
+      </form>
+    </div>
+    <script src="../node_modules/angular/angular.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var app = angular.module("myApp", []);
+
+      app.controller("ctrl", [
+        "$scope",
+        function($scope) {
+          $scope.records = [
+            {
+              "Name": "Alfreds Futterkiste",
+              "Country": "Germany",
+              "age": 12,
+              "children": [1,2,3]
+            }, {
+              "Name": "Berglunds snabbköp",
+              "Country": "Sweden",
+              "age": 23,
+              "children": [3, 5, 13]
+            }, {
+              "Name": "Centro comercial Moctezuma",
+              "Country": "Mexico",
+              "age": 45,
+              "children": []
+            }, {
+              "Name": "Ernst Handel",
+              "Country": "Austria",
+              "age": 39,
+              "children": [4,5,6,7]
+            }
+          ]
+         var data = {
+            "myOptions": [
+              {
+                "id": 106,
+                "group": "Group 1",
+                "label": "Item 1"
+              },
+              {
+                "id": 107,
+                "group": "Group 1",
+                "label": "Item 2"
+              },
+              {
+                "id": 110,
+                "group": "Group 2",
+                "label": "Item 3"
+              }
+            ]
+          }
+
+          $scope.myOptions = data.myOptions; 
+
+        }
+      ]);
+
+      app.controller('TestCtrl', ['$scope', function ($scope) {
+        $scope.sex = 'm';
+
+        $scope.cities = [
+          {
+            name: '青岛',
+            code: 'qd'
+          },
+          {
+            name: '北京',
+            code: 'bj'
+          },
+          {
+            name: '济南',
+            code: 'jn'
+          }
+        ];
+      }]);
+
+      let lowercase = angular.lowercase('aDaAa')
+      console.log(lowercase)
+
+    </script>
+  </body>
+</html>

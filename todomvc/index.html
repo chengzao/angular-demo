@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TodoMVC</title>
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<body ng-app="myApp" ng-controller="todoController">
+
+<div ng-view></div>
+<!--ng-template -->
+<script id="tmpl" type="text/ng-template">
+	<section class="todoapp" >
+		<header class="header">
+			<h1>todos</h1>
+			<form  ng-submit="add()">
+				<input ng-model="newTasks" class="new-todo" placeholder="What needs to be done?" autofocus>
+			</form>
+		</header>
+		<section class="main">
+			<input ng-click="toggleAll()" class="toggle-all" type="checkbox">
+			<label for="toggle-all">Mark all as complete</label>
+			<ul class="todo-list">
+				<li auto-focus  ng-repeat="item in tasks |filter:isComplete track by $index"  ng-class="{'completed':item.completed,'editing':isEditingId==item.id}">
+					<div class="view">
+						<input ng-model="item.completed" class="toggle" type="checkbox">
+						<label ng-dblclick="edit(item.id)">{{item.name}}</label>
+						<button class="destroy" ng-click="remove(item.id)"></button>
+					</div>
+					<form ng-submit="save()" >
+						<input class="edit" ng-model="item.name" value="Rule the web">
+					</form>
+				</li>
+			</ul>
+		</section>
+			<footer class="footer">
+				<span class="todo-count"><strong>{{leftItem}}</strong> item left</span>
+				<ul class="filters">
+					<li>
+						<a ng-class="{'selected':isComplete.completed==undefined}" href="#/all" ng-click="all()">All</a>
+					</li>
+					<li>
+						<a ng-class="{'selected':isComplete.completed==false}"  href="#/active" ng-click="active()">Active</a>
+					</li>
+					<li>
+						<a ng-class="{'selected':isComplete.completed==true}" href="#/completed" ng-click="completed()">Completed</a>
+					</li>
+				</ul>
+				<button ng-show="isShow()" ng-click="clearCompleted()" class="clear-completed">Clear completed</button>
+			</footer>
+	</section>
+</script>
+
+</body>
+	<script src="js/angular.min.js"></script>
+	<script src="js/angular-route.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controller.js"></script>
+	<script src="js/service.js"></script>
+	<script src="js/directive.js"></script>
+</html>

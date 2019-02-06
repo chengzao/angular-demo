@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ng-内置指令</title>
+</head>
+<body ng-app="app">
+	<p>{{1+2}}</p>
+	<div ng-bind="1+2"></div>
+	<ul ng-init="arr = [1,2,3,4]">
+		<li ng-repeat="item in arr">
+			{{item}}
+		</li>
+	</ul>
+</body>
+<script src="../node_modules/angular/angular.js"></script>
+<script>
+	var myApp = angular.module('app',[])
+</script>
+</html>
