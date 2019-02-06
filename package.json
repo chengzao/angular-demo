@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "serve --config serve.json",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
-    "release": "standard-version"
+    "release": "standard-version",
+    "commit": "npx git-cz"
   },
   "keywords": [],
   "author": "",
