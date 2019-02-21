@@ -15,7 +15,8 @@
     "@uirouter/angularjs": "^1.0.20",
     "angular": "^1.5.3",
     "bootstrap": "^3.3.6",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "serve": "^10.1.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.2.1",

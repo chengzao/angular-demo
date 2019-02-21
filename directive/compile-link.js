@@ -21,9 +21,9 @@ myApp.directive('repeater',function(){
 			// 返回 post link 函数
 			return function(scope,ele,attrs,controller){
 				console.log('compile2..link..')
-			},
+			}
 			// post link..
-			link:function(){}
+			// link:function(){}
 		}
 	}
 })

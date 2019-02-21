@@ -2,23 +2,20 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>directive-templateUrl</title>
+	<title>directive-template</title>
 </head>
 <script src="../node_modules/angular/angular.js"></script>
-<script src="hello-2.js"></script>
+<script src="hello.js"></script>
 <body ng-app="app">
+  <h2>AEMC</h2>
 	<hello></hello>
 	<div hello></div>
 	<div class="hello"></div>
 	<!-- directive:hello -->
-	<div></div>
-
-
-	
-	<script type="text/ng-template" id="tmpl2">
-		<div>ng-template</div>
-	</script>
-
-	<hello-demo></hello-demo>
+  <div></div>
+  <h2>独立scope</h2>
+  <hello2></hello2>
+  <hello2></hello2>
+  <hello2></hello2>
 </body>
 </html>
