@@ -41,7 +41,7 @@
         <li ng-repeat="item in obj2 |filter :false">
             {{item.id}},{{item.name}},{{item.completed}}
         </li>
-    </ul>	
+    </ul>
 
     <ul>
         <li ng-repeat="item in obj3 |filter : isCompleted">
@@ -57,7 +57,7 @@
 
 	app.controller('demoController', ['$scope','$filter', function($scope,$filter){
 		$scope.money = 78936676;
-		
+
 		$scope.data = +new Date();
 
 		$scope.jsonData={name:'小明',age:12,parents:[{name:'小明爸',age:36},{name:'小明妈',age:34}]};
@@ -97,7 +97,11 @@
         //
         var number = $filter('number')(9000123)
         console.log(number);
-        
+
+        $scope.projectList = $filter('filter')($scope.obj3, function (value, index, array) {
+          console.log(value, index);
+        });
+
 	}])
 </script>
 </html>
