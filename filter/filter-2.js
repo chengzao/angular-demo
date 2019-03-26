@@ -27,7 +27,11 @@ var myApp = angular.module('app',[],function($filterProvider,$provide,$controlle
 		}
 	});
 
-	$controllerProvider.register('ctrl',function($scope,Data){
-		$scope.data = Data;
+	$controllerProvider.register('ctrl',function($scope,Data, $filter){
+    $scope.data = Data;
+    $scope.arr = [1,2,3]
+    $scope.myFilter = function(item){
+      return item > 1;
+    }
 	})
 });

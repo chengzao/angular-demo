@@ -12,7 +12,13 @@
 				{{user.age}}
 				{{user.city}}
 			</li>
-		</ul>
+    </ul>
+    <h2>MyFilter</h2>
+		<ul>
+			<li ng-repeat="item in arr | filter: myFilter">
+				{{item}}
+			</li>
+    </ul>
 	</div>
 </body>
 <script src="../node_modules/angular/angular.js"></script>
