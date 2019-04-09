@@ -1,0 +1,329 @@
+@charset "utf-8"; 
+/* 
+@名称: base 
+@功能: 重设浏览器默认样式 
+*/ 
+/* 防止用户自定义背景颜色对网页的影响，添加让用户可以自定义字体 */ 
+/* 内外边距通常让各个浏览器样式的表现位置不同 */ 
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section { 
+  margin:0; 
+  padding:0; 
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -ms-box-sizing:border-box;
+  -o-box-sizing:border-box;
+  box-sizing:border-box;
+} 
+/* 要注意表单元素并不继承父级 font 的问题 */ 
+button,input,select,textarea { 
+  font:14px "Microsoft Yahei",tahoma,arial,sans-serif; 
+} 
+html,body{
+    width: 100%;
+    /*height: 100%;*/
+    /*min-height: 100%;*/
+    color: #333;
+    font-family: "Helvetica Neue",Tahoma, Arial,"Microsoft Yahei",sans-serif;
+    font-size: 14px;
+    background-color: #f3f3f4;
+}
+input,select,textarea { 
+  font-size:100%; 
+} 
+/* 去掉各Table cell 的边距并让其边重合 */ 
+table { 
+  border-collapse:collapse; 
+  border-spacing:0; 
+} 
+/* IE bug fixed: th 不继承 text-align*/ 
+th { 
+  text-align:inherit; 
+} 
+/* 去除默认边框 */ 
+fieldset,img { 
+  border:none; 
+} 
+/* 去掉 firefox 下此元素的边框 */ 
+abbr,acronym { 
+  border:none; 
+  font-variant:normal; 
+} 
+/* 一致的 del 样式 */ 
+del { 
+  text-decoration:line-through; 
+} 
+address,caption,cite,code,dfn,em,th,var { 
+  font-style:normal; 
+  font-weight:500; 
+} 
+/* 去掉列表前的标识, li 会继承 */ 
+ol,ul { 
+  list-style:none; 
+} 
+/* 对齐是排版最重要的因素, 别让什么都居中 */ 
+caption,th { 
+  text-align:left; 
+} 
+/* 来自yahoo, 让标题都自定义, 适应多个系统应用 */ 
+h1,h2,h3,h4,h5,h6 { 
+  font-size:100%; 
+  font-weight:400; 
+  line-height: inherit;
+}
+h2{
+  font-size: 20px;
+} 
+h3{
+  font-size: 18px;
+} 
+h4{
+  font-size: 16px;
+} 
+h5{
+  font-size: 14px;
+  font-family: "Helvetica Neue","Arial","PingFang SC","Hiragino Sans GB","\5B8B\4F53","Microsoft Yahei",sans-serif;
+} 
+h6{
+  font-size: 12px;
+  font-family: "Helvetica Neue","Arial","PingFang SC","Hiragino Sans GB","\5B8B\4F53","Microsoft Yahei",sans-serif;
+} 
+q:before,q:after { 
+  content:''; 
+} 
+/* 统一上标和下标 */ 
+sub, sup { 
+  font-size:75%; 
+  line-height:0; 
+  position:relative; 
+  vertical-align:baseline; 
+} 
+sup { 
+  top:-0.5em; 
+} 
+sub { 
+  bottom:-0.25em; 
+} 
+/* 让链接在 hover 状态下显示下划线 */ 
+a:hover { 
+  text-decoration:underline; 
+} 
+/* 默认不显示下划线，保持页面简洁 */ 
+ins,a { 
+  color: #333;
+  text-decoration:none; 
+} 
+/* IE6,7焦点点状线去除 */ 
+a:focus,*:focus { 
+  outline:none; 
+  text-decoration: none;
+} 
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color: #999;
+}
+input::-moz-input-placeholder,
+textarea::-moz-input-placeholder {
+    color: #999;
+}
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
+    color: #999;
+}
+pre {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+/* 清除浮动 */ 
+.clearfix:before,.clearfix:after { 
+  content:""; 
+  display:table; 
+} 
+.clearfix:after { 
+  clear:both; 
+  overflow:hidden; 
+  display: block;
+  visibility: hidden;
+  height: 0;
+  line-height: 0;
+} 
+.clearfix { 
+  zoom:1;  
+} 
+.clear{ 
+  clear:both; 
+  display:block; 
+  overflow:hidden; 
+  height:0; 
+  line-height:0; 
+  font-size:0; 
+} 
+.hide { 
+  display:none !important; 
+  visibility:hidden; 
+} 
+.block { 
+  display:block !important; 
+}
+.inline-block{
+  display:inline-block !important;
+}
+.ovh{
+  overflow: hidden;
+}
+.ovdot{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pointer{
+  cursor: pointer;
+}
+.relative{
+  position: relative;
+}
+.tac{
+  text-align: center;
+}
+.f12{
+  font-size: 12px;
+  font-family: "Helvetica Neue","Arial","PingFang SC","Hiragino Sans GB","\5B8B\4F53","Microsoft Yahei",sans-serif;
+}
+.f16{
+  font-size: 16px;
+}
+.f18{
+  font-size: 18px;
+}
+.f20{
+  font-size: 20px;
+}
+.none{
+  display: none !important;
+}
+.h100{height: 100% !important;}
+.mt0{margin-top: 0px !important;}
+.mt4{margin-top: 4px !important;}
+.mt10{margin-top: 10px !important;}
+.mt15{margin-top: 15px !important;}
+.mt20{margin-top: 20px !important;}
+.mt30{margin-top: 30px !important;}
+.mt40{margin-top: 40px !important;}
+.mt50{margin-top: 50px !important;}
+.mb0{margin-bottom: 0px !important;}
+.mb4{margin-bottom: 4px !important;}
+.mb10{margin-bottom: 10px !important;}
+.mb15{margin-bottom: 15px !important;}
+.mb20{margin-bottom: 20px !important;}
+.mb25{margin-bottom: 25px !important;}
+.mb30{margin-bottom: 30px !important;}
+.ml0{margin-left: 0px !important;}
+.ml4{margin-left: 4px !important;}
+.ml5{margin-left: 5px !important;}
+.ml10{margin-left: 10px !important;}
+.ml15{margin-left: 15px !important;}
+.ml20{margin-left: 20px !important;}
+.ml25{margin-left: 25px !important;}
+.ml30{margin-left: 30px !important;}
+.mr0{margin-right: 0px !important;}
+.mr5{margin-right: 5px !important;}
+.mr10{margin-right: 10px !important;}
+.mr15{margin-right: 15px !important;}
+.mr20{margin-right: 20px !important;}
+.mr25{margin-right: 25px !important;}
+.mr30{margin-right: 30px !important;}
+.mr50{margin-right: 50px !important;}
+.mat{margin: 0 auto;}
+
+.pt4{padding-top: 4px !important;}
+.p10{padding: 10px !important;}
+.p15{padding: 15px !important;}
+.p20{padding: 20px !important;}
+.p25{padding: 25px !important;}
+.p30{padding: 30px !important;}
+.pt25{padding-top: 25px !important;}
+.pl10{padding-left: 10px !important;}
+.pl15{padding-left: 15px !important;}
+.pl20{padding-left: 20px !important;}
+.pl25{padding-left: 25px !important;}
+.pl30{padding-left: 30px !important;}
+.pl40{padding-left: 40px !important;}
+.pb0{padding-bottom: 0px !important;}
+.pb15{padding-bottom: 15px !important;}
+.pb20{padding-bottom: 20px !important;}
+.pb25{padding-bottom: 25px !important;}
+.pb50{padding-bottom: 50px !important;}
+.pr20{padding-right: 20px !important;}
+.pr15{padding-right: 15px !important;}
+.ptb20{padding: 20px 0 !important;}
+.plr20{padding:0 20px !important;}
+.ptb15{padding: 15px 0 !important;}
+.plr15{padding:0 15px !important;}
+
+.brdnone{
+    border: none;
+}
+.ofl-hidden{
+    overflow: hidden;
+}
+.c-fff{color: #fff!important;}
+.c-333{color: #333!important;}
+.c-666{color: #666!important;}
+.c-999{color: #999!important;}
+.c-ccc{color: #ccc!important;}
+.c-red{color: #ff4040!important;}
+.c-green{color: #15b972!important;}
+.c-b3{color: #b3b3b3!important;}
+.c_bgc_white{background-color: #ffffff!important;}
+.c_bgc_blue{background-color: #289bf0!important;}
+.c_bgc_green{background-color: #1ab394!important;}
+.c_bgc_green_hover{background-color: #1ab394;}
+.c_bgc_green_hover:hover {
+    background-color: #1cc09e;
+}
+.tip-content {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+    font-style: normal;
+    line-height: 16px;
+    padding: 3px 5px;
+    position: fixed;
+    z-index: 9999;
+}
+.common-color{
+    color:#ffc85a;
+}
+.common-color:hover,.common-color-dark{
+  color: #ffd37a;
+}
+*,*:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #999;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #999;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #999;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #999;
+}
+
+.wb-a { word-break: break-all !important; }
+
+/* 解决angular加载闪烁 */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}

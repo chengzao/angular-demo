@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="statisticsPc">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>index</title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <script src="../libs/tools.js"></script>
+  <script>
+    // var _checkPlatform = checkPlatform()
+    // if(_checkPlatform.isMobile){
+    //   location.href= location.origin+location.pathname+location.search+location.hash+'#/route1';
+    // }else{
+    //   location.href = location.origin + location.pathname + location.search + location.hash+'#/route2';
+    // }
+  </script>
+</head>
+<body ng-cloak ng-controller="mainCtrl">
+  <div>index -{{datas.title}}</div>
+  <div class="row">
+    <div class="span12">
+      <div class="well" ui-view></div>
+    </div>
+  </div>
+  <script src="../libs/jquery.min.js"></script>
+  <script src="../libs/angular.min.js"></script>
+  <script src="../libs/angular-sanitize.js"></script>
+  <script src="../libs/angular-strap.min.js"></script>
+  <script src="../libs/angular-ui-router.min.js"></script>
+  <script src="../libs/highcharts.js"></script>
+  <script src="../libs/highcharts-more.js"></script>
+  <script src="./controller/app.js"></script>
+  <script src="./rootRouter.js"></script>
+  <script src="./service/httpServer.js"></script>
+  <script src="./controller/main.js"></script>
+  <script src="./controller/route1Ctrl.js"></script>
+  <script src="./controller/route2Ctrl.js"></script>
+</body>
+</html>
